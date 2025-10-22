@@ -1,0 +1,196 @@
+"use client"
+
+import { useState } from "react"
+import { Calendar, MapPin } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+
+interface StepOneProps {
+  onContinue: () => void
+  onSaveExit: () => void
+}
+
+export function StepOne({ onContinue, onSaveExit }: StepOneProps) {
+  const [eventName, setEventName] = useState("")
+  const [eventType, setEventType] = useState("")
+  const [date, setDate] = useState("")
+  const [time, setTime] = useState("")
+  const [timeFormat, setTimeFormat] = useState("AM")
+  const [location, setLocation] = useState("")
+  const [email, setEmail] = useState("")
+  const [organization, setOrganization] = useState("")
+  const [countryCode, setCountryCode] = useState("US +1")
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-white text-2xl font-semibold mb-1">Event setup</h1>
+        <p className="text-gray-400 text-sm">Basic event information</p>
+      </div>
+
+      <div className="space-y-4">
+        <div>
+          <Label htmlFor="event-name" className="text-white text-sm mb-2 block">
+            Event name
+          </Label>
+          <Input
+            id="event-name"
+            placeholder="e.g birthday batch"
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
+            className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg"
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="event-type" className="text-white text-sm mb-2 block">
+            Event type
+          </Label>
+          <Select value={eventType} onValueChange={setEventType}>
+            <SelectTrigger className="bg-[#474d4b] border-none text-white h-12 rounded-lg">
+              <SelectValue placeholder="Select one" />
+            </SelectTrigger>
+            <SelectContent className="bg-[#333736] border-none text-white">
+              <SelectItem value="birthday">Birthday</SelectItem>
+              <SelectItem value="wedding">Wedding</SelectItem>
+              <SelectItem value="corporate">Corporate Event</SelectItem>
+              <SelectItem value="party">Party</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="date" className="text-white text-sm mb-2 block">
+              Date
+            </Label>
+            <div className="relative">
+              <Input
+                id="date"
+                type="text"
+                placeholder="dd/mm/yy"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg pr-10"
+              />
+              <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            </div>
+          </div>
+          <div>
+            <Label htmlFor="time" className="text-white text-sm mb-2 block">
+              Time
+            </Label>
+            <div className="flex gap-2">
+              <Input
+                id="time"
+                type="text"
+                placeholder="00:00"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg flex-1"
+              />
+              <Select value={timeFormat} onValueChange={setTimeFormat}>
+                <SelectTrigger className="bg-[#474d4b] border-none text-white h-12 rounded-lg w-20">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-[#333736] border-none text-white">
+                  <SelectItem value="AM">AM</SelectItem>
+                  <SelectItem value="PM">PM</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <Label htmlFor="location" className="text-white text-sm mb-2 block">
+            Location
+          </Label>
+          <Select value={location} onValueChange={setLocation}>
+            <SelectTrigger className="bg-[#474d4b] border-none text-white h-12 rounded-lg">
+              <SelectValue placeholder="Select one" />
+            </SelectTrigger>
+            <SelectContent className="bg-[#333736] border-none text-white">
+              <SelectItem value="venue1">Venue 1</SelectItem>
+              <SelectItem value="venue2">Venue 2</SelectItem>
+              <SelectItem value="custom">Custom Location</SelectItem>
+            </SelectContent>
+          </Select>
+          <button className="text-white text-sm underline mt-2 flex items-center gap-1">
+            <MapPin className="h-4 w-4" />
+            Use my current location
+          </button>
+        </div>
+
+        <div>
+          <Label htmlFor="email" className="text-white text-sm mb-2 block">
+            Organizer&apos;s email
+          </Label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="johndoe@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg"
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="organization" className="text-white text-sm mb-2 block">
+            Organization/Company Name
+          </Label>
+          <Input
+            id="organization"
+            placeholder="John Doe enterprises"
+            value={organization}
+            onChange={(e) => setOrganization(e.target.value)}
+            className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg"
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="phone" className="text-white text-sm mb-2 block">
+            Organization phone number (optional)
+          </Label>
+          <div className="flex gap-2">
+            <Select value={countryCode} onValueChange={setCountryCode}>
+              <SelectTrigger className="bg-[#474d4b] border-none text-white h-12 rounded-lg w-28">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-[#333736] border-none text-white">
+                <SelectItem value="US +1">🇺🇸 US +1</SelectItem>
+                <SelectItem value="UK +44">🇬🇧 UK +44</SelectItem>
+                <SelectItem value="CA +1">🇨🇦 CA +1</SelectItem>
+              </SelectContent>
+            </Select>
+            <Input
+              id="phone"
+              type="tel"
+              className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg flex-1"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex gap-3 pt-4">
+        <Button
+          onClick={onSaveExit}
+          variant="outline"
+          className="flex-1 bg-[#333736] border-none text-white hover:bg-[#474d4b] h-12 rounded-lg"
+        >
+          Save & Exit
+        </Button>
+        <Button onClick={onContinue} className="flex-1 bg-[#f86701] hover:bg-[#d95801] text-white h-12 rounded-lg">
+          Continue
+        </Button>
+      </div>
+
+      <p className="text-center text-gray-400 text-xs flex items-center justify-center gap-1">
+        <span className="text-white">🔒</span> Your event data is safe and secure
+      </p>
+    </div>
+  )
+}
