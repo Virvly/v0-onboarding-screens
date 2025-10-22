@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Calendar, MapPin } from "lucide-react"
+import { Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -26,18 +26,18 @@ export function StepOne({ onContinue, onSaveExit }: StepOneProps) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-white text-2xl font-semibold mb-1">Event setup</h1>
+        <h1 className="text-white text-2xl font-semibold mb-1">Event Setup</h1>
         <p className="text-gray-400 text-sm">Basic event information</p>
       </div>
 
       <div className="space-y-4">
         <div>
           <Label htmlFor="event-name" className="text-white text-sm mb-2 block">
-            Event name
+            Event Name
           </Label>
           <Input
             id="event-name"
-            placeholder="e.g birthday batch"
+            placeholder="e.g Birthday Party"
             value={eventName}
             onChange={(e) => setEventName(e.target.value)}
             className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg"
@@ -46,7 +46,7 @@ export function StepOne({ onContinue, onSaveExit }: StepOneProps) {
 
         <div>
           <Label htmlFor="event-type" className="text-white text-sm mb-2 block">
-            Event type
+            Event Type
           </Label>
           <Select value={eventType} onValueChange={setEventType}>
             <SelectTrigger className="bg-[#474d4b] border-none text-white h-12 rounded-lg">
@@ -121,25 +121,21 @@ export function StepOne({ onContinue, onSaveExit }: StepOneProps) {
           <Label htmlFor="location" className="text-white text-sm mb-2 block">
             Location
           </Label>
-          <Select value={location} onValueChange={setLocation}>
-            <SelectTrigger className="bg-[#474d4b] border-none text-white h-12 rounded-lg">
-              <SelectValue placeholder="Select one" />
-            </SelectTrigger>
-            <SelectContent className="bg-[#333736] border-none text-white">
-              <SelectItem value="venue1">Venue 1</SelectItem>
-              <SelectItem value="venue2">Venue 2</SelectItem>
-              <SelectItem value="custom">Custom Location</SelectItem>
-            </SelectContent>
-          </Select>
+          <Input
+            id="location"
+            placeholder="Enter location address..."
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg"
+          />
           <button className="text-white text-sm underline mt-2 flex items-center gap-1">
-            <MapPin className="h-4 w-4" />
-            Use my current location
+            Choose location from map
           </button>
         </div>
 
         <div>
           <Label htmlFor="email" className="text-white text-sm mb-2 block">
-            Organizer&apos;s email
+            Organizer&apos;s Email
           </Label>
           <Input
             id="email"

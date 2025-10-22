@@ -5,10 +5,11 @@ import { StepIndicator } from "@/components/event-setup/step-indicator"
 import { StepOne } from "@/components/event-setup/step-one"
 import { StepTwo } from "@/components/event-setup/step-two"
 import { StepThree } from "@/components/event-setup/step-three"
+import { StepFour } from "@/components/event-setup/step-four"
 
 export default function EventSetupPage() {
   const [currentStep, setCurrentStep] = useState(1)
-  const totalSteps = 3
+  const totalSteps = 4
 
   const handleBack = () => {
     if (currentStep > 1) {
@@ -42,7 +43,8 @@ export default function EventSetupPage() {
 
           {currentStep === 1 && <StepOne onContinue={handleContinue} onSaveExit={handleSaveExit} />}
           {currentStep === 2 && <StepTwo onContinue={handleContinue} onSaveExit={handleSaveExit} />}
-          {currentStep === 3 && <StepThree onGoToDashboard={handleGoToDashboard} onSaveExit={handleSaveExit} />}
+          {currentStep === 3 && <StepThree onContinue={handleContinue} onSaveExit={handleSaveExit} />}
+          {currentStep === 4 && <StepFour onGoToDashboard={handleGoToDashboard} onSaveExit={handleSaveExit} />}
         </div>
       </div>
     </div>

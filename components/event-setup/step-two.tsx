@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Upload } from "lucide-react"
+import { Upload, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -16,18 +16,21 @@ export function StepTwo({ onContinue, onSaveExit }: StepTwoProps) {
   const [tagline, setTagline] = useState("")
   const [hashtags, setHashtags] = useState("")
   const [sponsorLink, setSponsorLink] = useState("")
-  const [allowAttendeeUpload, setAllowAttendeeUpload] = useState(true)
-  const [allowProUpload, setAllowProUpload] = useState(true)
+  const [attendeeUploads, setAttendeeUploads] = useState(true)
+  const [contentCreatorUploads, setContentCreatorUploads] = useState(true)
+  const [photographerUploads, setPhotographerUploads] = useState(true)
   const [requireConsent, setRequireConsent] = useState(true)
   const [enableShareToDownload, setEnableShareToDownload] = useState(true)
+  const [enablePayToDownload, setEnablePayToDownload] = useState(false)
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(["facebook", "youtube"])
 
   const platforms = [
-    { id: "facebook", icon: "facebook", label: "Facebook" },
-    { id: "instagram", icon: "instagram", label: "Instagram" },
-    { id: "youtube", icon: "youtube", label: "YouTube" },
-    { id: "tiktok", icon: "tiktok", label: "TikTok" },
-    { id: "linkedin", icon: "linkedin", label: "LinkedIn" },
+    { id: "facebook", icon: "f", label: "Facebook" },
+    { id: "instagram", icon: "📷", label: "Instagram" },
+    { id: "youtube", icon: "▶", label: "YouTube" },
+    { id: "tiktok", icon: "♪", label: "TikTok" },
+    { id: "linkedin", icon: "in", label: "LinkedIn" },
+    { id: "x", icon: "𝕏", label: "X" },
   ]
 
   const togglePlatform = (platformId: string) => {
@@ -46,11 +49,11 @@ export function StepTwo({ onContinue, onSaveExit }: StepTwoProps) {
       <div className="space-y-4">
         <div>
           <Label htmlFor="tagline" className="text-white text-sm mb-2 block">
-            Event tagline
+            Event Tagline
           </Label>
           <Input
             id="tagline"
-            placeholder="e.g birthday batch"
+            placeholder="e.g Birthday Party"
             value={tagline}
             onChange={(e) => setTagline(e.target.value)}
             className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg"
@@ -68,7 +71,7 @@ export function StepTwo({ onContinue, onSaveExit }: StepTwoProps) {
             onChange={(e) => setHashtags(e.target.value)}
             className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg"
           />
-          <p className="text-gray-400 text-xs mt-1">Add at least 5 hashtags</p>
+          <p className="text-gray-400 text-xs mt-1">Add up to 5 hashtags</p>
         </div>
 
         <div>
@@ -97,33 +100,57 @@ export function StepTwo({ onContinue, onSaveExit }: StepTwoProps) {
 
         <div className="space-y-3 pt-2">
           <div className="flex items-center justify-between">
-            <Label htmlFor="attendee-upload" className="text-white text-sm">
-              Allow attendee upload
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="attendee-uploads" className="text-white text-sm">
+                Attendee Uploads
+              </Label>
+              <Info className="h-4 w-4 text-gray-400" />
+            </div>
             <Switch
-              id="attendee-upload"
-              checked={allowAttendeeUpload}
-              onCheckedChange={setAllowAttendeeUpload}
+              id="attendee-uploads"
+              checked={attendeeUploads}
+              onCheckedChange={setAttendeeUploads}
               className="data-[state=checked]:bg-[#10c600]"
             />
           </div>
 
           <div className="flex items-center justify-between">
-            <Label htmlFor="pro-upload" className="text-white text-sm">
-              Allow pro photographer upload
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="content-creator-uploads" className="text-white text-sm">
+                Content Creator Uploads
+              </Label>
+              <Info className="h-4 w-4 text-gray-400" />
+            </div>
             <Switch
-              id="pro-upload"
-              checked={allowProUpload}
-              onCheckedChange={setAllowProUpload}
+              id="content-creator-uploads"
+              checked={contentCreatorUploads}
+              onCheckedChange={setContentCreatorUploads}
               className="data-[state=checked]:bg-[#10c600]"
             />
           </div>
 
           <div className="flex items-center justify-between">
-            <Label htmlFor="consent" className="text-white text-sm">
-              Require consent
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="photographer-uploads" className="text-white text-sm">
+                Photographer Uploads
+              </Label>
+              <Info className="h-4 w-4 text-gray-400" />
+            </div>
+            <Switch
+              id="photographer-uploads"
+              checked={photographerUploads}
+              onCheckedChange={setPhotographerUploads}
+              className="data-[state=checked]:bg-[#10c600]"
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Label htmlFor="consent" className="text-white text-sm">
+                Require Consent
+              </Label>
+              <Info className="h-4 w-4 text-gray-400" />
+            </div>
             <Switch
               id="consent"
               checked={requireConsent}
@@ -133,13 +160,31 @@ export function StepTwo({ onContinue, onSaveExit }: StepTwoProps) {
           </div>
 
           <div className="flex items-center justify-between">
-            <Label htmlFor="share-download" className="text-white text-sm">
-              Enable share to download
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="share-download" className="text-white text-sm">
+                Enable Share to Download
+              </Label>
+              <Info className="h-4 w-4 text-gray-400" />
+            </div>
             <Switch
               id="share-download"
               checked={enableShareToDownload}
               onCheckedChange={setEnableShareToDownload}
+              className="data-[state=checked]:bg-[#10c600]"
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Label htmlFor="pay-download" className="text-white text-sm">
+                Enable Pay to Download
+              </Label>
+              <Info className="h-4 w-4 text-gray-400" />
+            </div>
+            <Switch
+              id="pay-download"
+              checked={enablePayToDownload}
+              onCheckedChange={setEnablePayToDownload}
               className="data-[state=checked]:bg-[#10c600]"
             />
           </div>
@@ -159,13 +204,7 @@ export function StepTwo({ onContinue, onSaveExit }: StepTwoProps) {
                 }`}
                 aria-label={platform.label}
               >
-                <span className="text-white text-xl">
-                  {platform.id === "facebook" && "f"}
-                  {platform.id === "instagram" && "📷"}
-                  {platform.id === "youtube" && "▶"}
-                  {platform.id === "tiktok" && "♪"}
-                  {platform.id === "linkedin" && "in"}
-                </span>
+                <span className="text-white text-xl">{platform.icon}</span>
               </button>
             ))}
           </div>
