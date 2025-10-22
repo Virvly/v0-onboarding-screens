@@ -73,33 +73,46 @@ export function StepOne({ onContinue, onSaveExit }: StepOneProps) {
                 placeholder="dd/mm/yy"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg pr-10"
+                className="bg-[#474d4b] border-none text-white placeholder:text-gray-400 h-12 rounded-full pr-12"
               />
-              <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#333736] rounded-md p-1.5">
+                <Calendar className="h-5 w-5 text-gray-300" />
+              </div>
             </div>
           </div>
           <div>
             <Label htmlFor="time" className="text-white text-sm mb-2 block">
               Time
             </Label>
-            <div className="flex gap-2">
+            <div className="relative">
               <Input
                 id="time"
                 type="text"
                 placeholder="00:00"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg flex-1"
+                className="bg-[#474d4b] border-none text-white placeholder:text-gray-400 h-12 rounded-full pr-20"
               />
-              <Select value={timeFormat} onValueChange={setTimeFormat}>
-                <SelectTrigger className="bg-[#474d4b] border-none text-white h-12 rounded-lg w-20">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-[#333736] border-none text-white">
-                  <SelectItem value="AM">AM</SelectItem>
-                  <SelectItem value="PM">PM</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
+                <button
+                  type="button"
+                  onClick={() => setTimeFormat("AM")}
+                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                    timeFormat === "AM" ? "bg-[#333736] text-white" : "text-gray-400"
+                  }`}
+                >
+                  AM
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTimeFormat("PM")}
+                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                    timeFormat === "PM" ? "bg-[#333736] text-white" : "text-gray-400"
+                  }`}
+                >
+                  PM
+                </button>
+              </div>
             </div>
           </div>
         </div>
