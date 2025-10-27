@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { ThemeSelector } from "@/components/account-settings/theme-selector"
 import { PlanCard } from "@/components/account-settings/plan-card"
 import { OTPVerificationModal } from "@/components/account-settings/otp-verification-modal"
+import { PageHeader } from "@/components/shared/page-header"
 
 export default function AccountSettingsPage() {
   const router = useRouter()
@@ -44,9 +45,12 @@ export default function AccountSettingsPage() {
           <ArrowLeft className="h-5 w-5" />
           <span className="font-medium">Back</span>
         </button>
-        <button onClick={handleLogout} className="font-medium text-[#f86701] underline">
-          Logout
-        </button>
+        <div className="flex items-center gap-4">
+          <button onClick={handleLogout} className="font-medium text-[#f86701] underline">
+            Logout
+          </button>
+          <PageHeader showMenu={false} />
+        </div>
       </div>
 
       {/* Content */}

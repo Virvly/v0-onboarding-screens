@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { SocialPlatformSelector } from "@/components/find-my-photos/social-platform-selector"
 import { DownloadUnlockOptions } from "@/components/find-my-photos/download-unlock-options"
 import { DownloadSuccessModal } from "@/components/find-my-photos/download-success-modal"
+import { PageHeader } from "@/components/shared/page-header"
 
 export default function ShareToDownloadPage() {
   const router = useRouter()
@@ -45,15 +46,17 @@ export default function ShareToDownloadPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-md mx-auto min-h-screen flex flex-col">
-        {/* Header */}
         <div className="p-4">
-          <button
-            onClick={() => (view === "unlock" ? setView("share") : router.back())}
-            className="flex items-center gap-2 text-[#f86701] mb-6"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            <span>Back</span>
-          </button>
+          <div className="flex items-center justify-between mb-6">
+            <button
+              onClick={() => (view === "unlock" ? setView("share") : router.back())}
+              className="flex items-center gap-2 text-[#f86701]"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span>Back</span>
+            </button>
+            <PageHeader />
+          </div>
         </div>
 
         {/* Content */}

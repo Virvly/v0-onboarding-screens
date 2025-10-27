@@ -1,13 +1,13 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { UploadArea } from "@/components/photographer-upload/upload-area"
 import { FileUploadItem } from "@/components/photographer-upload/file-upload-item"
+import { PageHeader } from "@/components/shared/page-header"
 
 interface UploadingFile {
   file: File
@@ -74,10 +74,13 @@ export default function PhotographerUploadPage() {
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-2xl mx-auto px-6 py-8">
         {/* Header */}
-        <button onClick={() => router.back()} className="flex items-center gap-2 text-[#f86701] mb-8">
-          <ArrowLeft className="w-5 h-5" />
-          <span>Back</span>
-        </button>
+        <div className="flex items-center justify-between mb-8">
+          <button onClick={() => router.back()} className="flex items-center gap-2 text-[#f86701]">
+            <ArrowLeft className="w-5 h-5" />
+            <span>Back</span>
+          </button>
+          <PageHeader />
+        </div>
 
         <h1 className="text-2xl font-semibold mb-8">Upload From External Device</h1>
 

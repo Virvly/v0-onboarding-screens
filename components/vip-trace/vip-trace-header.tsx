@@ -1,8 +1,8 @@
 "use client"
 
-import { ArrowLeft, Menu, Search } from "lucide-react"
-import Image from "next/image"
+import { ArrowLeft, Search } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { PageHeader } from "@/components/shared/page-header"
 
 interface VipTraceHeaderProps {
   matchCount?: number
@@ -32,14 +32,7 @@ export function VipTraceHeader({ matchCount, showMatchCount = false }: VipTraceH
           </p>
         )}
       </div>
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700">
-          <Image src="/user-profile-illustration.png" alt="Profile" width={40} height={40} className="object-cover" />
-        </div>
-        <button className="text-white hover:text-gray-300 transition-colors">
-          <Menu className="w-6 h-6" />
-        </button>
-      </div>
+      <PageHeader />
     </div>
   )
 }

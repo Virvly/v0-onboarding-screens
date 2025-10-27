@@ -7,6 +7,7 @@ import { FeaturedPhotoCard } from "@/components/event-feed/featured-photo-card"
 import { RoleFilterTabs } from "@/components/event-feed/role-filter-tabs"
 import { GalleryStream } from "@/components/event-feed/gallery-stream"
 import { SponsorsSection } from "@/components/event-feed/sponsors-section"
+import { PageHeader } from "@/components/shared/page-header"
 
 export default function EventFeedPage() {
   const router = useRouter()
@@ -43,8 +44,7 @@ export default function EventFeedPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
-        {/* Header */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between">
           <button
             onClick={() => router.back()}
             className="text-[#f86701] flex items-center gap-2 hover:text-[#f98c07] transition-colors"
@@ -52,6 +52,7 @@ export default function EventFeedPage() {
             <ChevronLeft className="w-5 h-5" />
             <span>Back</span>
           </button>
+          <PageHeader />
         </div>
 
         {/* Event Selector */}

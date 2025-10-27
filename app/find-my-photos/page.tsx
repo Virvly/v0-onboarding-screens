@@ -9,6 +9,7 @@ import { PhotoResultsGrid } from "@/components/find-my-photos/photo-results-grid
 import { EventSelector } from "@/components/find-my-photos/event-selector"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { PageHeader } from "@/components/shared/page-header"
 
 // Mock photo data
 const mockPhotos = [
@@ -56,6 +57,7 @@ export default function FindMyPhotosPage() {
             <ArrowLeft className="h-5 w-5" />
             <span className="text-sm font-medium">Back</span>
           </button>
+          <PageHeader />
         </div>
         <div className="px-4 pb-4">
           <h1 className="text-2xl font-bold mb-1">{showResults ? "Find My Photos" : "Find My Photos"}</h1>

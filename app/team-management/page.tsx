@@ -1,11 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, Palette, Users } from "lucide-react"
+import { Palette, Users } from "lucide-react"
 import { TeamMemberCard } from "@/components/team-management/team-member-card"
 import { EditRoleModal } from "@/components/team-management/edit-role-modal"
 import { AddMemberModal } from "@/components/team-management/add-member-modal"
 import { RemoveConfirmationModal } from "@/components/team-management/remove-confirmation-modal"
+import { PageHeader } from "@/components/shared/page-header"
 
 interface TeamMember {
   id: string
@@ -96,18 +97,12 @@ export default function TeamManagementPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-800">
         <div>
           <h1 className="text-xl font-semibold">Manage Team</h1>
           <p className="text-sm text-gray-400">Invite and manage event collaborators</p>
         </div>
-        <div className="flex items-center gap-3">
-          <img src="/user-profile-illustration.png" alt="Profile" className="w-10 h-10 rounded-full" />
-          <button className="text-white hover:text-gray-300">
-            <Menu className="h-6 w-6" />
-          </button>
-        </div>
+        <PageHeader />
       </div>
 
       <div className="p-4 space-y-6">
