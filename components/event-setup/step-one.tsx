@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { CountryCodeSelector } from "@/components/shared/country-code-selector"
 
 interface StepOneProps {
   onContinue: () => void
@@ -164,21 +165,14 @@ export function StepOne({ onContinue, onSaveExit }: StepOneProps) {
           <Label htmlFor="phone" className="text-white text-sm mb-2 block">
             Organization phone number (optional)
           </Label>
-          <div className="flex gap-2">
-            <Select value={countryCode} onValueChange={setCountryCode}>
-              <SelectTrigger className="bg-[#474d4b] border-none text-white h-12 rounded-lg w-28">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-[#333736] border-none text-white">
-                <SelectItem value="US +1">🇺🇸 US +1</SelectItem>
-                <SelectItem value="UK +44">🇬🇧 UK +44</SelectItem>
-                <SelectItem value="CA +1">🇨🇦 CA +1</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="relative">
+            <div className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
+              <CountryCodeSelector value={countryCode} onValueChange={setCountryCode} />
+            </div>
             <Input
               id="phone"
               type="tel"
-              className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-lg flex-1"
+              className="bg-[#474d4b] border-none text-white placeholder:text-gray-500 h-12 rounded-full pl-[156px]"
             />
           </div>
         </div>
