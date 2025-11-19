@@ -1,10 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Copy, Download } from "lucide-react"
+import { Copy, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 
 interface StepFourProps {
   onGoToDashboard: () => void
@@ -12,9 +10,8 @@ interface StepFourProps {
 }
 
 export function StepFour({ onGoToDashboard, onSaveExit }: StepFourProps) {
-  const [eventLink, setEventLink] = useState("https://your eventlink")
+  const [eventLink] = useState("https://your eventlink")
   const [copied, setCopied] = useState(false)
-  const [qrDownloaded, setQrDownloaded] = useState(false)
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(eventLink)
@@ -23,170 +20,167 @@ export function StepFour({ onGoToDashboard, onSaveExit }: StepFourProps) {
   }
 
   const downloadQR = () => {
-    setQrDownloaded(true)
-    setTimeout(() => setQrDownloaded(false), 3000)
+    // Handle QR code download
+    console.log("[v0] Downloading QR code")
+  }
+
+  const handlePreview = (step: number) => {
+    console.log(`[v0] Preview step ${step}`)
+  }
+
+  const handleShare = (step: number) => {
+    console.log(`[v0] Share step ${step}`)
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-8">
       <div>
-        <h1 className="text-white text-2xl font-semibold mb-1">Event Setup</h1>
-        <p className="text-gray-400 text-sm">Payment & activation</p>
+        <h1 className="text-white text-3xl font-semibold mb-2">Event Setup</h1>
+        <p className="text-gray-400 text-base">Payment & Activation</p>
+      </div>
+
+      <div className="bg-[#474d4b] rounded-2xl p-5 flex items-center justify-between">
+        <div className="flex items-baseline gap-2">
+          <p className="text-white font-semibold text-3xl">$25</p>
+          <p className="text-gray-400 text-base">10GB Storage - 30 days</p>
+        </div>
+        <Button
+          variant="outline"
+          className="bg-[#5a605e] border-none text-white hover:bg-[#666c6a] h-11 px-6 rounded-full text-base font-medium"
+        >
+          Update plan
+        </Button>
+      </div>
+
+      <div className="space-y-3">
+        <h2 className="text-white text-xl font-medium">Event Link</h2>
+        <div className="bg-[#474d4b] rounded-2xl p-4 flex items-center justify-between">
+          <p className="text-gray-300 text-base">{eventLink}</p>
+          <Button
+            onClick={copyToClipboard}
+            variant="ghost"
+            className="text-white hover:bg-[#5a605e] h-10 px-5 rounded-full text-base font-medium flex items-center gap-2"
+          >
+            <Copy className="h-5 w-5" />
+            Copy
+          </Button>
+        </div>
+      </div>
+
+      <div className="bg-[#474d4b] rounded-2xl p-5 flex items-center gap-4">
+        <div className="bg-white p-2 rounded-lg flex-shrink-0">
+          <div className="w-24 h-24 bg-black flex items-center justify-center">
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <rect width="100" height="100" fill="white" />
+              {/* QR code pattern */}
+              <rect x="10" y="10" width="10" height="10" fill="black" />
+              <rect x="30" y="10" width="10" height="10" fill="black" />
+              <rect x="50" y="10" width="10" height="10" fill="black" />
+              <rect x="70" y="10" width="10" height="10" fill="black" />
+              <rect x="10" y="30" width="10" height="10" fill="black" />
+              <rect x="70" y="30" width="10" height="10" fill="black" />
+              <rect x="10" y="50" width="10" height="10" fill="black" />
+              <rect x="30" y="50" width="10" height="10" fill="black" />
+              <rect x="50" y="50" width="10" height="10" fill="black" />
+              <rect x="70" y="50" width="10" height="10" fill="black" />
+              <rect x="10" y="70" width="10" height="10" fill="black" />
+              <rect x="30" y="70" width="10" height="10" fill="black" />
+              <rect x="50" y="70" width="10" height="10" fill="black" />
+              <rect x="70" y="70" width="10" height="10" fill="black" />
+            </svg>
+          </div>
+        </div>
+        <div className="flex-1 flex items-center justify-between">
+          <div>
+            <p className="text-[#f86701] text-base font-semibold mb-1">Event QR Code</p>
+            <p className="text-gray-400 text-sm">Display and print your code</p>
+          </div>
+          <Button
+            onClick={downloadQR}
+            variant="outline"
+            className="bg-[#5a605e] border-none text-white hover:bg-[#666c6a] h-11 px-6 rounded-full text-base font-medium"
+          >
+            Download
+          </Button>
+        </div>
       </div>
 
       <div className="space-y-4">
-        {/* Pricing Card */}
-        <div className="bg-[#333736] rounded-lg p-4 flex items-center justify-between">
-          <div>
-            <p className="text-white font-semibold text-lg">$25</p>
-            <p className="text-gray-400 text-sm">10GB Storage - 30 days</p>
-          </div>
-          <Button
-            variant="outline"
-            className="bg-transparent border-gray-600 text-white hover:bg-[#474d4b] h-9 px-4 rounded-lg text-sm"
-          >
-            Update plan
-          </Button>
-        </div>
+        <h2 className="text-white text-xl font-medium">Next Step</h2>
 
-        {/* Event Link */}
-        <div>
-          <Label htmlFor="event-link" className="text-white text-sm mb-2 block">
-            Event Link
-          </Label>
-          <div className="relative">
-            <Input
-              id="event-link"
-              value={eventLink}
-              onChange={(e) => setEventLink(e.target.value)}
-              className="bg-[#474d4b] border-none text-white h-12 rounded-lg pr-20"
-              readOnly
-            />
-            <Button
-              onClick={copyToClipboard}
-              variant="ghost"
-              size="sm"
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-white hover:bg-[#5a605e] h-8 px-3 rounded"
-            >
-              <Copy className="h-4 w-4 mr-1" />
-              Copy
-            </Button>
-          </div>
-        </div>
-
-        {/* QR Code */}
-        <div className="bg-[#333736] rounded-lg p-4">
-          <div className="flex items-start gap-3">
-            <div className="bg-white p-2 rounded">
-              <div className="w-20 h-20 bg-black flex items-center justify-center">
-                <svg viewBox="0 0 100 100" className="w-full h-full">
-                  <rect width="100" height="100" fill="white" />
-                  <rect x="10" y="10" width="10" height="10" fill="black" />
-                  <rect x="30" y="10" width="10" height="10" fill="black" />
-                  <rect x="50" y="10" width="10" height="10" fill="black" />
-                  <rect x="70" y="10" width="10" height="10" fill="black" />
-                  <rect x="10" y="30" width="10" height="10" fill="black" />
-                  <rect x="70" y="30" width="10" height="10" fill="black" />
-                  <rect x="10" y="50" width="10" height="10" fill="black" />
-                  <rect x="30" y="50" width="10" height="10" fill="black" />
-                  <rect x="50" y="50" width="10" height="10" fill="black" />
-                  <rect x="70" y="50" width="10" height="10" fill="black" />
-                  <rect x="10" y="70" width="10" height="10" fill="black" />
-                  <rect x="70" y="70" width="10" height="10" fill="black" />
-                </svg>
-              </div>
-            </div>
+        {/* Step 1 */}
+        <div className="border border-gray-700 rounded-2xl p-5">
+          <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <p className="text-[#f86701] text-sm font-semibold mb-1">Event QR Code</p>
-              <p className="text-gray-400 text-xs mb-3">Display and print your code</p>
+              <p className="text-[#f86701] text-sm font-semibold mb-2 uppercase">STEP 1</p>
+              <p className="text-white text-base">Share event link with attendees.</p>
+            </div>
+            <div className="flex gap-3 flex-shrink-0">
               <Button
-                onClick={downloadQR}
+                onClick={() => handlePreview(1)}
                 variant="outline"
-                size="sm"
-                className="bg-transparent border-gray-600 text-white hover:bg-[#474d4b] h-8 px-3 rounded text-xs"
+                className="bg-[#474d4b] border-none text-white hover:bg-[#5a605e] h-10 px-6 rounded-full text-base font-medium"
               >
-                <Download className="h-3 w-3 mr-1" />
-                Download
+                Preview
+              </Button>
+              <Button
+                onClick={() => handleShare(1)}
+                variant="outline"
+                className="bg-[#474d4b] border-none text-white hover:bg-[#5a605e] h-10 px-6 rounded-full text-base font-medium"
+              >
+                Share
               </Button>
             </div>
           </div>
         </div>
 
-        {/* Next Steps */}
-        <div className="bg-[#1a1a1a] rounded-lg p-4">
-          <p className="text-white text-sm font-semibold mb-3">Next Step</p>
-          <div className="space-y-3 text-sm">
-            <div>
-              <p className="text-gray-300 mb-1">step 1</p>
-              <p className="text-white mb-2">Share event link with attendees</p>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-transparent border-gray-600 text-white hover:bg-[#474d4b] h-7 px-3 rounded text-xs"
-                >
-                  Preview
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-transparent border-gray-600 text-white hover:bg-[#474d4b] h-7 px-3 rounded text-xs"
-                >
-                  Share
-                </Button>
-              </div>
+        {/* Step 2 */}
+        <div className="border border-gray-700 rounded-2xl p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <p className="text-[#f86701] text-sm font-semibold mb-2 uppercase">STEP 2</p>
+              <p className="text-white text-base">
+                Invite your team (Photographers, Content Creator, Admin Assistants)
+              </p>
             </div>
-            <div>
-              <p className="text-gray-300 mb-1">step 2</p>
-              <p className="text-white mb-2">Invite your team (Photographer, UGC Creator, Admin Assistants)</p>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-transparent border-gray-600 text-white hover:bg-[#474d4b] h-7 px-3 rounded text-xs"
-                >
-                  Preview
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-transparent border-gray-600 text-white hover:bg-[#474d4b] h-7 px-3 rounded text-xs"
-                >
-                  Share
-                </Button>
-              </div>
+            <div className="flex gap-3 flex-shrink-0">
+              <Button
+                onClick={() => handlePreview(2)}
+                variant="outline"
+                className="bg-[#474d4b] border-none text-white hover:bg-[#5a605e] h-10 px-6 rounded-full text-base font-medium"
+              >
+                Preview
+              </Button>
+              <Button
+                onClick={() => handleShare(2)}
+                variant="outline"
+                className="bg-[#474d4b] border-none text-white hover:bg-[#5a605e] h-10 px-6 rounded-full text-base font-medium"
+              >
+                Share
+              </Button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex gap-3 pt-4">
+      <div className="pt-4">
         <Button
-          onClick={onSaveExit}
-          variant="outline"
-          className="flex-1 bg-[#333736] border-none text-white hover:bg-[#474d4b] h-12 rounded-lg"
+          onClick={onGoToDashboard}
+          className="w-full bg-[#f86701] hover:bg-[#d95801] text-white h-14 rounded-full text-lg font-semibold"
         >
-          Save & Exit
-        </Button>
-        <Button onClick={onGoToDashboard} className="flex-1 bg-[#f86701] hover:bg-[#d95801] text-white h-12 rounded-lg">
           Go to Dashboard
         </Button>
       </div>
 
-      <p className="text-center text-gray-400 text-xs flex items-center justify-center gap-1">
-        <span className="text-white">🔒</span> Payment secured by Stripe/Paystack
-      </p>
+      <div className="flex items-center justify-center gap-2 text-gray-400 text-sm">
+        <Shield className="h-4 w-4" />
+        <p>Payment secured by Stripe/Paystack</p>
+      </div>
 
-      {/* Success Notifications */}
+      {/* Success Notification */}
       {copied && (
-        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 bg-[#10c600] text-white px-6 py-3 rounded-lg shadow-lg">
-          Linked copied!
-        </div>
-      )}
-      {qrDownloaded && (
-        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 bg-[#10c600] text-white px-6 py-3 rounded-lg shadow-lg">
-          QR Code downloaded successfully
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 bg-[#10c600] text-white px-6 py-3 rounded-lg shadow-lg z-50">
+          Link copied!
         </div>
       )}
     </div>
